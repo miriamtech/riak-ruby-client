@@ -43,7 +43,7 @@ describe Riak::Client::BeefcakeProtobuffsBackend::TsCellCodec do
 
   describe 'serializing values' do
     it do
-      is_expected.to serialize(BigDecimal.new("0.1"), double_value: 0.1)
+      is_expected.to serialize(BigDecimal("0.1"), double_value: 0.1)
     end
 
     it 'refuses to serialize big numbers' do

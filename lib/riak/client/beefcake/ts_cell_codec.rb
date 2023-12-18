@@ -34,10 +34,8 @@ class Riak::Client::BeefcakeProtobuffsBackend
       TsCell.new case measure
                  when String
                    { varchar_value: measure }
-                 when Fixnum
-                   { sint64_value: measure }
-                 when Bignum
-                   { sint64_value: check_bignum_range(measure) }
+                 when Integer
+                   { sint64_value: check_integer_range(measure) }
                  when Float
                    { double_value: measure }
                  when BigDecimal
@@ -67,12 +65,12 @@ class Riak::Client::BeefcakeProtobuffsBackend
     end
 
     private
-    def check_bignum_range(bignum)
-      if (bignum > -0x8000000000000000) && (bignum < 0x7FFFFFFFFFFFFFFF)
-        return bignum
+    def check_integer_range(integer)
+      if (integer > -0x8000000000000000) && (integer < 0x7FFFFFFFFFFFFFFF)
+        return integer
       end
 
-      fail Riak::TimeSeriesError::SerializeBigIntegerError, bignum
+      fail Riak::TimeSeriesError::SerializeBigIntegerError, integer
     end
 
     def timestamp(cell)
