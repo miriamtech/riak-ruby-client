@@ -87,7 +87,7 @@ describe Riak::SecondaryIndex do
              @bucket,
              'asdf',
              ('aaaa'..'zzzz'),
-             :max_results => @max_results
+             { max_results: @max_results },
              ).
         and_return(@expected_collection)
       allow(@backend).to receive(:get_server_version).and_return('1.4.0')
@@ -121,8 +121,10 @@ describe Riak::SecondaryIndex do
              @bucket,
              'asdf',
              ('aaaa'..'zzzz'),
-             max_results: @max_results,
-             continuation: 'examplecontinuation'
+             {
+               max_results: @max_results,
+               continuation: 'examplecontinuation',
+             },
              ).
         and_return(@expected_collection)
       allow(@backend).to receive(:get_server_version).and_return('1.4.0')
@@ -158,7 +160,7 @@ describe Riak::SecondaryIndex do
              @bucket,
              'asdf',
              ('aaaa'..'zzzz'),
-             :max_results => @max_results
+             { max_results: @max_results },
              ).
         and_return(@expected_collection)
       allow(@backend).to receive(:get_server_version).and_return('1.4.0')
@@ -184,8 +186,10 @@ describe Riak::SecondaryIndex do
              @bucket,
              'asdf',
              ('aaaa'..'zzzz'),
-             max_results: @max_results,
-             continuation: 'examplecontinuation'
+             {
+               max_results: @max_results,
+               continuation: 'examplecontinuation',
+             },
              ).
         and_return(@second_collection)
 
@@ -214,7 +218,7 @@ describe Riak::SecondaryIndex do
              @bucket,
              'asdf',
              ('aaaa'..'zzzz'),
-             :return_terms => true
+             { return_terms: true },
              ).
         and_return(@expected_collection)
       allow(@backend).to receive(:get_server_version).and_return('1.4.0')

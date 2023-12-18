@@ -49,14 +49,14 @@ describe Riak::TimeSeries::List do
   it 'passes a block to the operator' do
     streamer = proc { double 'block contents' }
 
-    expect(operator).to receive(:list).with(table_name, streamer, timeout: nil)
+    expect(operator).to receive(:list).with(table_name, streamer, { timeout: nil })
 
     subject.issue! &streamer
   end
 
   it 'returns a list of results' do
     expect(operator).to receive(:list).
-                         with(table_name, nil, timeout: nil).
+                         with(table_name, nil, { timeout: nil }).
                          and_return(list_results)
 
     expect(subject.issue!).to eq list_results

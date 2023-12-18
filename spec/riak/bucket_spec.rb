@@ -71,7 +71,7 @@ describe Riak::Bucket do
     end
 
     it "allows a specified timeout when listing keys" do
-      expect(@backend).to receive(:list_keys).with(@bucket, timeout: 1234).and_return(%w{bar})
+      expect(@backend).to receive(:list_keys).with(@bucket, { timeout: 1234 }).and_return(%w{bar})
 
       keys = @bucket.keys timeout: 1234
 
@@ -200,8 +200,8 @@ describe Riak::Bucket do
 
   describe "checking if multiple objects exist" do
     it 'checks each object individually' do
-      expect(@bucket).to receive(:get).with('key1', head: true).and_return(true)
-      expect(@bucket).to receive(:get).with('key2', head: true).
+      expect(@bucket).to receive(:get).with('key1', { head: true }).and_return(true)
+      expect(@bucket).to receive(:get).with('key2', { head: true }).
         and_raise(Riak::ProtobuffsFailedRequest.new(:not_found, "not found"))
 
       @results = @bucket.exist_many %w{key1 key2}
@@ -326,7 +326,7 @@ describe Riak::Bucket do
     it "enables when disabled" do
       props['search'] = false
       expect(@client).to receive(:set_bucket_props).
-        with(@bucket, "precommit" => ["old", {"mod" => "riak_search_kv_hook", "fun" => "precommit"}], "search" => true)
+        with(@bucket, { "precommit" => ["old", {"mod" => "riak_search_kv_hook", "fun" => "precommit"}], "search" => true })
       @bucket.enable_index!
     end
   end
@@ -344,7 +344,7 @@ describe Riak::Bucket do
 
     it "disables when enabled" do
       expect(@client).to receive(:set_bucket_props).
-        with(@bucket, "precommit" => ["old"], "search" => false)
+        with(@bucket, { "precommit" => ["old"], "search" => false })
       @bucket.disable_index!
     end
   end

@@ -263,7 +263,7 @@ describe Riak::Client, test_client: true do
     end
 
     it "supports a timeout option" do
-      expect(@backend).to receive(:list_buckets).with(timeout: 1234).and_return(%w{test test2})
+      expect(@backend).to receive(:list_buckets).with({ timeout: 1234 }).and_return(%w{test test2})
 
       buckets = @client.buckets timeout: 1234
       expect(buckets.size).to eq(2)

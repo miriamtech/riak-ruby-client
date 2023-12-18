@@ -314,9 +314,11 @@ describe Riak::RObject do
       @object.key = 'foo'
       expect(@backend).to receive(:store_object).
                            with(@object,
-                                returnbody: false,
-                                w: 3,
-                                dw: 2).
+                                {
+                                  returnbody: false,
+                                  w: 3,
+                                  dw: 2
+                                }).
                            and_return(true)
       @object.store(returnbody: false, w: 3, dw: 2)
     end
@@ -353,7 +355,7 @@ describe Riak::RObject do
     end
 
     it "passes the requested R quorum to the backend" do
-      expect(@backend).to receive(:reload_object).with(@object, :r => 2).and_return(@object)
+      expect(@backend).to receive(:reload_object).with(@object, { r: 2 }).and_return(@object)
       @object.reload :r => 2
     end
 

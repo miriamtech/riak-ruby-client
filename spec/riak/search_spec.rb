@@ -30,7 +30,7 @@ describe "Search features" do
       end
 
       it "searches the default index with additional options" do
-        expect(@pb).to receive(:search).with(nil, 'foo', 'rows' => 30).and_return({})
+        expect(@pb).to receive(:search).with(nil, 'foo', { 'rows' => 30 }).and_return({})
         @client.search("foo", 'rows' => 30)
       end
 
