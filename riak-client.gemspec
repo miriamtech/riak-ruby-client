@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors = ['Bryce Kerley', 'Luke Bakken']
   gem.license = 'Apache-2.0'
 
-  gem.required_ruby_version = '>= 1.9.3'
+  gem.required_ruby_version = '>= 2.7.0'
 
   gem.add_development_dependency 'activesupport', '~> 4.2'
   gem.add_development_dependency 'instrumentable', '~> 1.1'
