@@ -125,12 +125,12 @@ describe Riak::Counter do
 
     it "doesn't retry on timeout" do
       @expect_post.once.and_raise('timeout')
-      expect(proc { @ctr.increment }).to raise_error
+      expect { @ctr.increment }.to raise_error
     end
 
     it "doesn't retry on quorum failure" do
       @expect_post.once.and_raise('quorum not satisfied')
-      expect(proc { @ctr.increment }).to raise_error
+      expect { @ctr.increment }.to raise_error
     end
   end
 end

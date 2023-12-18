@@ -110,12 +110,7 @@ describe Riak::Client::BeefcakeProtobuffsBackend do
 
       expect(protocol).to receive(:expect).and_return(response_message)
 
-      results = nil
-      fetch = proc do
-        results = backend.get_index 'bucket', 'words', 'asdf'
-      end
-
-      expect(fetch).not_to raise_error
+      results = backend.get_index 'bucket', 'words', 'asdf'
       expect(results).to eq([])
     end
   end
