@@ -61,8 +61,8 @@ describe Riak::Util::Escape do
     end
 
     it "allows URI-safe characters" do
-      expect(@object.escape("bracket[one")).to eq("bracket[one")
-      expect(@object.escape("sean@basho")).to eq("sean@basho")
+      expect(@object.escape("bracket[one")).to eq("bracket%5Bone")
+      expect(@object.escape("sean@basho")).to eq("sean%40basho")
     end
 
     it "escapes slashes" do
