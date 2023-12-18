@@ -25,7 +25,7 @@ module Riak
 
       # Provides the translation for a given internationalized message
       def t(message, options = {})
-        I18n.t("#{i18n_scope}.#{message}", options)
+        I18n.t("#{i18n_scope}.#{message}", **options)
       end
     end
   end
